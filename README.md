@@ -1,1 +1,1 @@
-This project creating with PERN stack!
+This project created with PERN stack!
