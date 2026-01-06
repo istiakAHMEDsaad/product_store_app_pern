@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "This is product store application's backend server.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc"

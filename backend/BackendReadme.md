@@ -7,3 +7,5 @@ Typescript development dependencies:
 ```
 npm install -D typescript ts-node nodemon drizzle-kit @types/express @types/cors @types/pg
 ```
+
+**Documents:**
