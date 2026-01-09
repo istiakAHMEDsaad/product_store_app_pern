@@ -30,7 +30,7 @@ export const comments = pgTable('comments', {
   userId: text('user_id')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  product_Id: text('product_id')
+  productId: text('product_id')
     .notNull()
     .references(() => products.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow(),
@@ -39,3 +39,34 @@ export const comments = pgTable('comments', {
 
 // Relation define how tables connect each other. This enables Drizzle's query API
 // to automatically join related data when using `with: {relationName: true}`
+
+// 1️⃣ Users Relations: A user can have many products and many comments
+// ⚠️ `many()` means one user can have multiple related records
+
+export const usersRelations = relations(users, ({ many }) => ({
+  products: many(products),
+  comments: many(comments),
+}));
+
+// 2️⃣ Products Relations: a product belongs to one user and can have many comments
+// ⚠️ `one()` means a single related record, `many()` menas multiple related records
+export const productsRelations = relations(products, ({ one, many }) => ({
+  comments: many(comments),
+
+  // `fields` = the foreign key column in this table (products.userId)
+  // `references` = the primary key column in the related table (users.id)
+  user: one(users, { fields: [products.userId], references: [users.id] }),
+}));
+
+// 3️⃣ Comments Relations: A comment belongs to one user and one product
+export const commentsRelations = relations(comments, ({ one }) => ({
+  // comment's userId foreign key references user.id primary key
+  user: one(users, { fields: [comments.userId], references: [users.id] }),
+
+  // comments productId foreign key references products.id primary key
+  products: one(products, {
+    fields: [comments.productId],
+    references: [products.id],
+  }),
+}));
+
