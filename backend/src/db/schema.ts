@@ -2,7 +2,7 @@ import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 // key is got on the code, value save on the database
-export const users = pgTable('users', {
+export const f = pgTable('users', {
   id: text('id').primaryKey(), //clerk id
   email: text('email').notNull().unique(),
   name: text('name'),
