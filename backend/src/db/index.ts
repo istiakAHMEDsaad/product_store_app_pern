@@ -4,7 +4,7 @@ import * as schema from './schema';
 import { ENV } from '../config/env';
 
 if (!ENV.DATABASE_URL) {
-  throw new Error('DB_URL is not set in environment variables');
+  throw new Error('DATABASE_URL is not set in environment variables');
 }
 
 // initialize PostgreSQL connection pool
@@ -15,8 +15,8 @@ pool.on('connect', () => {
   console.log('Database is connected successfully 💯');
 });
 
-pool.on('error', () => {
-  console.log('Database connection error ⚠️');
+pool.on('error', (err) => {
+  console.error('Database connection error ⚠️', err);
 });
 
 export const db = drizzle({ client: pool, schema });
