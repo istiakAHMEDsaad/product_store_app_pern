@@ -70,3 +70,36 @@ export async function createProduct(req: Request, res: Response) {
     res.status(500).json('Failed to create product');
   }
 }
+
+// update the product (protected)
+export async function updateProduct(req: Request, res: Response) {
+  try {
+    const { userId } = getAuth(req);
+    if (!userId) return res.status(401).json({ error: 'Unauthorized User' });
+
+    const { id } = req.params;
+    const { title, description, imageUrl } = req.body;
+
+    const existingProduct = await queries.getProductById(id);
+    if (!existingProduct) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+
+    if (existingProduct.userId !== userId) {
+      res.status(403).json({ error: 'You can only update your own products' });
+      return;
+    }
+
+    const product = await queries.updateProduct(id, {
+      title,
+      description,
+      imageUrl,
+    });
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error('Error updating product', error);
+    res.status(500).json({ error: 'Failed to update the product' });
+  }
+}
