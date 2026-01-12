@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as queries from '../db/queries';
 import { getAuth } from '@clerk/express';
 
-// get all products
+// get all products (public)
 export async function getAllProducts(req: Request, res: Response) {
   try {
     const products = await queries.getAllProducts();
@@ -13,7 +13,7 @@ export async function getAllProducts(req: Request, res: Response) {
   }
 }
 
-// get product by current user
+// get product by current user (protected)
 export async function getMyProducts(req: Request, res: Response) {
   try {
     const { userId } = getAuth(req);
@@ -27,7 +27,7 @@ export async function getMyProducts(req: Request, res: Response) {
   }
 }
 
-// get product by id
+// get product by id (public)
 export async function getProductById(req: Request, res: Response) {
   try {
     const { id } = req.body;
@@ -39,5 +39,34 @@ export async function getProductById(req: Request, res: Response) {
   } catch (error) {
     console.error('Product not found', error);
     res.status(500).json({ error: 'Failed to get product' });
+  }
+}
+
+// create product (protected)
+export async function createProduct(req: Request, res: Response) {
+  try {
+    const { userId } = getAuth(req);
+    if (!userId) return res.status(401).json({ error: 'Unauthorized User' });
+
+    const { title, description, imageUrl } = req.body;
+    if (!title || !description || !imageUrl) {
+      res
+        .status(400)
+        .json({ error: 'Title, description & imageUrl are required' });
+
+      return;
+    }
+
+    const product = await queries.createProduct({
+      title,
+      description,
+      imageUrl,
+      userId,
+    });
+
+    res.status(201).json(product);
+  } catch (error) {
+    console.error('Error creating product', error);
+    res.status(500).json('Failed to create product');
   }
 }
