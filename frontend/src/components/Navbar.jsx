@@ -56,16 +56,6 @@ const Navbar = () => {
               </SignUpButton>
             </>
           )}
-          {/* <div>
-            <Link to='/create' className='btn btn-primary btn-sm gap-1'>
-              <PlusIcon className='size-4' />
-              <span className='hidden sm:inline'>New Product</span>
-            </Link>
-            <Link to='/profile' className='btn btn-primary btn-sm gap-1'>
-              <UserIcon className='size-4' />
-              <span className='hidden sm:inline'>New Product</span>
-            </Link>
-          </div> */}
         </div>
       </div>
     </div>
