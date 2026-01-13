@@ -30,7 +30,7 @@ export async function getMyProducts(req: Request, res: Response) {
 // get product by id (public)
 export async function getProductById(req: Request, res: Response) {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const product = await queries.getProductById(id);
 
     if (!product) return res.status(404).json({ error: 'Product not found' });
