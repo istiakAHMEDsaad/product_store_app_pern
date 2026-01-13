@@ -1,21 +1,25 @@
-import {
-  SignedOut,
-  SignedIn,
-  SignInButton,
-  SignOutButton,
-} from '@clerk/clerk-react';
+import { Route, Routes } from 'react-router';
+import Navbar from './components/Navbar';
+import CreatePage from './pages/CreatePage';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import ProfilePage from './pages/ProfilePage';
+import EditProductPage from './pages/EditProductPage';
 
 const App = () => {
   return (
-    <div>
-      <div>
-        <SignedOut>
-          <SignInButton className='btn btn-primary' />
-        </SignedOut>
-        <SignedIn>
-          <SignOutButton className='btn btn-error' />
-        </SignedIn>
-      </div>
+    <div className='min-h-screen bg-base-100'>
+      <Navbar />
+
+      <main className='max-w-7xl mx-auto px-4 py-8'>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/product/:id' element={<ProductPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/create' element={<CreatePage />} />
+          <Route path='/edit/:id' element={<EditProductPage />} />
+        </Routes>
+      </main>
     </div>
   );
 };
