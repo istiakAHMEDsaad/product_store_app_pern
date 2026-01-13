@@ -2,6 +2,7 @@ import {
   UserButton,
   SignInButton,
   SignUpButton,
+  SignOutButton,
   useAuth,
 } from '@clerk/clerk-react';
 
@@ -44,6 +45,9 @@ const Navbar = () => {
                 <UserIcon className='size-4' />
                 <span className='hidden sm:inline'>Profile</span>
               </Link>
+              <button className='btn btn-sm'>
+                <SignOutButton />
+              </button>
             </>
           ) : (
             <>
