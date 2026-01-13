@@ -1,7 +1,21 @@
+import {
+  SignedOut,
+  SignedIn,
+  SignInButton,
+  SignOutButton,
+} from '@clerk/clerk-react';
+
 const App = () => {
   return (
     <div>
-      <button className='btn btn-primary'>Click</button>
+      <div>
+        <SignedOut>
+          <SignInButton className='btn btn-primary' />
+        </SignedOut>
+        <SignedIn>
+          <SignOutButton className='btn btn-error' />
+        </SignedIn>
+      </div>
     </div>
   );
 };
