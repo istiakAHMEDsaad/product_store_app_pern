@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import EditProductPage from './pages/EditProductPage';
 import useAuthReq from './hooks/useAuthReq';
 import useUserSync from './hooks/useUserSync';
+import LoadingRing from './components/LoadingSpinner/LoadingRing';
 
 const App = () => {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
