@@ -13,7 +13,6 @@ const App = () => {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
   const { isSynced } = useUserSync();
 
-  console.log({ isSignedIn });
   if (!isClerkLoaded) return null;
 
   return (

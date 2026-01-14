@@ -26,7 +26,7 @@ const Navbar = () => {
                 className='absolute inset-0 w-full h-full object-cover'
               />
             </div>
-            <span className='text-lg font-bold font-roboto uppercase tracking-wider'>
+            <span className='text-lg font-bold font-roboto uppercase tracking-wider max-sm:hidden'>
               Productify
             </span>
           </Link>
