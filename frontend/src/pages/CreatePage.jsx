@@ -8,6 +8,7 @@ import {
   SparklesIcon,
   TypeIcon,
 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 function CreatePage() {
   const navigate = useNavigate();
@@ -20,8 +21,12 @@ function CreatePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProduct.mutate(formData, {
-      onSuccess: () => navigate('/'),
+
+    toast.promise(createProduct.mutateAsync(formData), {
+      loading: 'Creating product...',
+      success: () => {
+        navigate('/');
+      },
     });
   };
 
