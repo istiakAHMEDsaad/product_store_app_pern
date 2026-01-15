@@ -2,12 +2,13 @@ import { useProducts } from '../hooks/useProducts';
 import LoadingRing from '../components/LoadingSpinner/LoadingRing';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { SparklesIcon, PackageIcon } from 'lucide-react';
-import { SignInButton } from '@clerk/clerk-react';
+import { SignInButton, useAuth } from '@clerk/clerk-react';
 import { Link } from 'react-router';
 import ProductCard from '../components/ProductCard';
 
 const HomePage = () => {
   const { data: products, isLoading, error } = useProducts();
+  const { isSignedIn } = useAuth();
 
   if (isLoading) return <LoadingRing />;
 
@@ -39,18 +40,27 @@ const HomePage = () => {
             <p className='py-4 text-base-content/60'>
               Upload, discover, and connect with creators.
             </p>
-            <Link to='/create'>
-              <button className='btn btn-primary'>
-                <SparklesIcon className='size-4' />
-                Start Selling
-              </button>
-            </Link>
+            {isSignedIn ? (
+              <Link to='/create'>
+                <button className='btn btn-primary'>
+                  <SparklesIcon className='size-4' />
+                  Start Selling
+                </button>
+              </Link>
+            ) : (
+              <SignInButton mode='modal'>
+                <button className='btn btn-primary'>
+                  <SparklesIcon className='size-4' />
+                  Start Selling
+                </button>
+              </SignInButton>
+            )}
           </div>
         </div>
       </div>
 
       {/* Products */}
-      <div>
+      <div className='mt-10'>
         <h2 className='text-lg font-bold flex items-center gap-2 mb-4'>
           <div className='relative h-5 w-5'>
             <img
