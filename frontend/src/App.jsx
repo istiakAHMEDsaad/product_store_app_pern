@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import Navbar from './components/Navbar';
 import CreatePage from './pages/CreatePage';
 import HomePage from './pages/HomePage';
@@ -11,7 +11,7 @@ import LoadingRing from './components/LoadingSpinner/LoadingRing';
 
 const App = () => {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
-  const { isSynced } = useUserSync();
+  useUserSync();
 
   if (!isClerkLoaded) return null;
 
@@ -24,7 +24,10 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/product/:id' element={<ProductPage />} />
           <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/create' element={<CreatePage />} />
+          <Route
+            path='/create'
+            element={isSignedIn ? <CreatePage /> : <Navigate to='/' />}
+          />
           <Route path='/edit/:id' element={<EditProductPage />} />
         </Routes>
       </main>

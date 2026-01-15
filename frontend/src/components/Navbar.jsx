@@ -46,7 +46,7 @@ const Navbar = () => {
                 <span className='hidden sm:inline'>Profile</span>
               </Link>
 
-              <SignOutButton className='btn btn-sm' />
+              <SignOutButton className='btn btn-sm btn-soft btn-error' />
             </>
           ) : (
             <>
