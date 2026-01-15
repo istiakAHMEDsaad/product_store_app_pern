@@ -22,13 +22,17 @@ function CreatePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    toast.promise(createProduct.mutateAsync(formData), {
-      loading: 'Creating product...',
-      success: () => {
-        navigate('/');
-        return 'Product created ✅';
+    toast.promise(
+      createProduct.mutateAsync(formData),
+      {
+        loading: 'Creating product...',
+        success: () => {
+          navigate('/');
+          return 'Product created ✅';
+        },
       },
-    });
+      { duration: 3000 }
+    );
   };
 
   return (

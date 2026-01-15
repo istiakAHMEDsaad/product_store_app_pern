@@ -21,41 +21,44 @@ function ProductPage() {
   const deleteProduct = useDeleteProduct();
 
   const handleDelete = () => {
-    toast((t) => (
-      <div className='flex flex-col gap-3'>
-        <span className='text-sm font-medium'>
-          Are you sure you want to delete this product?
-        </span>
+    toast(
+      (t) => (
+        <div className='flex flex-col gap-3'>
+          <span className='text-sm font-medium'>
+            Are you sure you want to delete this product?
+          </span>
 
-        <div className='flex flex-end gap-2'>
-          {/* cancle */}
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className='btn btn-primary btn-outline btn-xs'
-          >
-            Cancel
-          </button>
+          <div className='flex flex-end gap-2'>
+            {/* cancle */}
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className='btn btn-primary btn-outline btn-xs'
+            >
+              Cancel
+            </button>
 
-          {/* yes */}
-          <button
-            onClick={() => {
-              toast.dismiss(t.id);
-              // deleteProduct.mutate(id, { onSuccess: () => navigate('/') })
-              toast.promise(deleteProduct.mutateAsync(id), {
-                loading: 'Deleting the product...',
-                success: () => {
-                  navigate('/');
-                  return 'Product deleted 🗑️';
-                },
-              });
-            }}
-            className='btn btn-error btn-xs text-white'
-          >
-            Delete
-          </button>
+            {/* yes */}
+            <button
+              onClick={() => {
+                toast.dismiss(t.id);
+                // deleteProduct.mutate(id, { onSuccess: () => navigate('/') })
+                toast.promise(deleteProduct.mutateAsync(id), {
+                  loading: 'Deleting the product...',
+                  success: () => {
+                    navigate('/');
+                    return 'Product deleted 🗑️';
+                  },
+                });
+              }}
+              className='btn btn-error btn-xs text-white'
+            >
+              Delete
+            </button>
+          </div>
         </div>
-      </div>
-    ));
+      ),
+      { duration: 3000 }
+    );
   };
 
   if (isLoading) return <LoadingRing />;

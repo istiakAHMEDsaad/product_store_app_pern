@@ -7,7 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import EditProductPage from './pages/EditProductPage';
 import useAuthReq from './hooks/useAuthReq';
 import useUserSync from './hooks/useUserSync';
-import LoadingRing from './components/LoadingSpinner/LoadingRing';
+import FooterSection from './components/FooterSection';
 
 const App = () => {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
@@ -22,7 +22,10 @@ const App = () => {
       <main className='max-w-5xl mx-auto px-4 py-8'>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/product/:id' element={<ProductPage />} />
+          <Route
+            path='/product/:id'
+            element={isSignedIn ? <ProductPage /> : <Navigate to='/' />}
+          />
           <Route
             path='/profile'
             element={isSignedIn ? <ProfilePage /> : <Navigate to='/' />}
@@ -37,6 +40,8 @@ const App = () => {
           />
         </Routes>
       </main>
+
+      <FooterSection />
     </div>
   );
 };
