@@ -1,6 +1,5 @@
 import { useProducts } from '../hooks/useProducts';
 import LoadingRing from '../components/LoadingSpinner/LoadingRing';
-import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { SparklesIcon, PackageIcon } from 'lucide-react';
 import { SignInButton, useAuth } from '@clerk/clerk-react';
 import { Link } from 'react-router';
@@ -60,7 +59,7 @@ const HomePage = () => {
       </div>
 
       {/* Products */}
-      <div className='mt-10'>
+      <div>
         <h2 className='text-lg font-bold flex items-center gap-2 mb-4'>
           <div className='relative h-5 w-5'>
             <img

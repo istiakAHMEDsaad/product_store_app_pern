@@ -1,24 +1,70 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createProduct, getAllProducts } from '../lib/api';
+import {
+  createProduct,
+  deleteProduct,
+  getAllProducts,
+  getMyProducts,
+  getProductById,
+  updateProduct,
+} from '../lib/api';
 import { toast } from 'react-hot-toast';
 
 export const useProducts = () => {
-  const result = useQuery({ queryKey: ['products'], queryFn: getAllProducts });
-  return result;
+  return useQuery({ queryKey: ['products'], queryFn: getAllProducts });
 };
 
 export const useCreateProduct = () => {
   const queryClient = useQueryClient();
 
-  const result = useMutation({
+  return useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
-      toast.success('Product created successfully!');
+      toast.success('Product created successfully ✅');
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },
     onError: (error) => {
       toast.error(error.message || 'Failed to create product');
     },
   });
-  return result;
+};
+
+export const useProduct = (id) => {
+  return useQuery({
+    queryKey: ['product', id],
+    queryFn: () => getProductById(id),
+    enabled: !!id, //double bang operator (string value => boolean)
+  });
+};
+
+export const useMyProducts = () => {
+  return useQuery({ queryKey: ['myProducts'], queryFn: getMyProducts });
+};
+
+export const useDeleteProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      toast.success('Product deleted 🗑️');
+      queryClient.invalidateQueries({ queryKey: ['myProducts'] });
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Failed to delete product');
+    },
+  });
+};
+
+export const useUpdateProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess: (_, variables) => {
+      toast.success('Product update successfully ✅');
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['product', variables.id] });
+      queryClient.invalidateQueries({ queryKey: ['myProducts'] });
+    },
+  });
 };
