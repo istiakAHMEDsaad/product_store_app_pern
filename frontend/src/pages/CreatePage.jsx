@@ -26,6 +26,7 @@ function CreatePage() {
       loading: 'Creating product...',
       success: () => {
         navigate('/');
+        return 'Product created ✅';
       },
     });
   };

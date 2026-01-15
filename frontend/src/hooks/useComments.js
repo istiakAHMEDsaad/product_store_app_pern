@@ -8,13 +8,12 @@ export const useCreateComment = () => {
   return useMutation({
     mutationFn: createComment,
     onSuccess: (_, variables) => {
-      toast.success('Comment posted 💬');
       queryClient.invalidateQueries({
         queryKey: ['product', variables.productId],
       });
     },
     onError: (error) => {
-      toast.error(error.message || 'Failed post a comment!');
+      toast.error(error.message || 'Failed to create comment!');
     },
   });
 };
@@ -25,7 +24,6 @@ export const useDeleteComment = (productId) => {
   return useMutation({
     mutationFn: deleteComment,
     onSuccess: () => {
-      toast.success('Comment deleted 🗑️');
       queryClient.invalidateQueries({ queryKey: ['product', productId] });
     },
     onError: (error) => {

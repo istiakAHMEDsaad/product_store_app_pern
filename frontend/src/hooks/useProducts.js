@@ -19,7 +19,6 @@ export const useCreateProduct = () => {
   return useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
-      toast.success('Product created successfully ✅');
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },
     onError: (error) => {
@@ -46,7 +45,6 @@ export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
-      toast.success('Product deleted 🗑️');
       queryClient.invalidateQueries({ queryKey: ['myProducts'] });
     },
     onError: (error) => {

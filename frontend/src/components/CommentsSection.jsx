@@ -18,41 +18,42 @@ function CommentsSection({ productId, comments = [], currentUserId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!content.trim()) return;
-    createComment.mutate(
-      { productId, content },
-      { onSuccess: () => setContent('') }
-    );
+    toast.promise(createComment.mutateAsync({ productId, content }), {
+      loading: 'Posting a comment...',
+      success: 'Comment posted 💬',
+    });
   };
 
   const handleDelete = (commentId) => {
-    toast(
-      (t) => (
-        <div className='flex flex-col gap-3'>
-          <span className='text-sm font-medium'>
-            Are you sure you want to delete this comment?
-          </span>
-          <div className='flex justify-end gap-2'>
-            {/* Cancel button */}
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className='btn btn-primary btn-outline btn-xs'
-            >
-              Cancel
-            </button>
-            {/* Yes Button */}
-            <button
-              onClick={() => {
-                toast.dismiss(t.id);
-                deleteComment.mutate({ commentId });
-              }}
-              className='btn btn-error btn-xs text-white'
-            >
-              Delete
-            </button>
-          </div>
+    toast((t) => (
+      <div className='flex flex-col gap-3'>
+        <span className='text-sm font-medium'>
+          Are you sure you want to delete this comment?
+        </span>
+        <div className='flex justify-end gap-2'>
+          {/* Cancel button */}
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className='btn btn-primary btn-outline btn-xs'
+          >
+            Cancel
+          </button>
+          {/* Yes Button */}
+          <button
+            onClick={() => {
+              toast.dismiss(t.id);
+              toast.promise(deleteComment.mutateAsync({ commentId }), {
+                loading: 'Deleting the comment...',
+                success: 'Comment deleted 🗑️',
+              });
+            }}
+            className='btn btn-error btn-xs text-white'
+          >
+            Delete
+          </button>
         </div>
-      )
-    );
+      </div>
+    ));
   };
 
   return (

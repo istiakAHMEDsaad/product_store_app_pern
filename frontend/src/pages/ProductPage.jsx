@@ -40,7 +40,14 @@ function ProductPage() {
           <button
             onClick={() => {
               toast.dismiss(t.id);
-              deleteProduct.mutate(id, { onSuccess: () => navigate('/') });
+              // deleteProduct.mutate(id, { onSuccess: () => navigate('/') })
+              toast.promise(deleteProduct.mutateAsync(id), {
+                loading: 'Deleting the product...',
+                success: () => {
+                  navigate('/');
+                  return 'Product deleted 🗑️';
+                },
+              });
             }}
             className='btn btn-error btn-xs text-white'
           >
@@ -70,6 +77,7 @@ function ProductPage() {
 
   return (
     <div className='max-w-4xl mx-auto space-y-6'>
+      {/* delete, edit top */}
       <div className='flex items-center justify-between'>
         <Link to='/' className='btn btn-ghost btn-sm gap-1'>
           <ArrowLeftIcon className='size-4' /> Back
