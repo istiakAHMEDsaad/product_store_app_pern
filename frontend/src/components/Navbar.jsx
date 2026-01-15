@@ -45,9 +45,8 @@ const Navbar = () => {
                 <UserIcon className='size-4' />
                 <span className='hidden sm:inline'>Profile</span>
               </Link>
-              <button className='btn btn-sm'>
-                <SignOutButton />
-              </button>
+
+              <SignOutButton className='btn btn-sm' />
             </>
           ) : (
             <>
