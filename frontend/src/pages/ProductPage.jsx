@@ -41,7 +41,6 @@ function ProductPage() {
             <button
               onClick={() => {
                 toast.dismiss(t.id);
-                // deleteProduct.mutate(id, { onSuccess: () => navigate('/') })
                 toast.promise(deleteProduct.mutateAsync(id), {
                   loading: 'Deleting the product...',
                   success: () => {
