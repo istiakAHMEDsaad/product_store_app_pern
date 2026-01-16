@@ -8,6 +8,11 @@ Productify is a professional, full-stack product management application built us
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![TanstackQuery](https://img.shields.io/badge/TanStack_Query-160440?style=for-the-badge&logo=react-query)
 
+
+## 📸 Screenshot
+![Image](./productify-multi.png)
+[Live Link](https://product-store-app-frontend.onrender.com/)
+
 ## 🚀 Features
 
 - **Authentication:** Secure sign-in/up via Clerk (Google, GitHub, Facebook, and Email).
