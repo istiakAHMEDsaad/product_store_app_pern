@@ -70,6 +70,7 @@ export const getAllProducts = async ({
     where: whereClause,
     with: { user: true },
     orderBy: (products, { desc }) => [desc(products.createdAt)],
+    // the square brackets are required because Drizzle ORM's orderBy expects an array, even for a single column.
     limit,
     offset,
   });
@@ -87,7 +88,6 @@ export const getAllProducts = async () => {
   return db.query.products.findMany({
     with: { user: true },
     orderBy: (products, { desc }) => [desc(products.createdAt)], // desc means: you will see the latest products first
-    // the square brackets are required because Drizzle ORM's orderBy expects an array, even for a single column.
   });
 };
 */

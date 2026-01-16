@@ -17,6 +17,7 @@ Productify is a professional, full-stack product management application built us
 - **Responsive Design:** Mobile-first UI optimized for all screen sizes.
 - **Database:** Managed serverless PostgreSQL via Neon.tech.
 - **Performance:** Optimized data fetching using TanStack Query (React Query).
+- **Find Product:** Find your desire products with search and pagination option.
 
 ## 🛠️ Tech Stack
 
