@@ -10,7 +10,7 @@ Productify is a professional, full-stack product management application built us
 
 
 ## 📸 Screenshot
-![Image](./productify-multi.png)
+![live ss](./productify.png)
 [Live Link](https://product-store-app-frontend.onrender.com/)
 
 ## 🚀 Features
