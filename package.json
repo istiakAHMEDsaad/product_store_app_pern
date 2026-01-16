@@ -1,0 +1,25 @@
+{
+  "name": "productify",
+  "version": "1.0.0",
+  "description": "This productify application created with backend (typescript, express, prisma, drizzle, sql) & frontend (react, tailwindcss, clerk, react dom, tanstack query)",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend && npm run build --prefix backend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/istiakAHMEDsaad/product_store_app_pern.git"
+  },
+  "keywords": [],
+  "author": "Istiak Ahmed Saad",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/istiakAHMEDsaad/product_store_app_pern/issues"
+  },
+  "homepage": "https://github.com/istiakAHMEDsaad/product_store_app_pern#readme"
+}
