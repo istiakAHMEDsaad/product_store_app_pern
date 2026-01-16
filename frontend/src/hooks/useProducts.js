@@ -59,10 +59,12 @@ export const useUpdateProduct = () => {
   return useMutation({
     mutationFn: updateProduct,
     onSuccess: (_, variables) => {
-      toast.success('Product update successfully ✅');
       queryClient.invalidateQueries({ queryKey: ['products'] });
       queryClient.invalidateQueries({ queryKey: ['product', variables.id] });
       queryClient.invalidateQueries({ queryKey: ['myProducts'] });
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Failed to edit product');
     },
   });
 };

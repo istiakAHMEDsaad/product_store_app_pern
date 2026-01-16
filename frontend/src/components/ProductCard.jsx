@@ -15,6 +15,10 @@ const ProductCard = ({ product }) => {
         <img
           src={product.imageUrl}
           alt={product.title}
+          onError={(e) =>
+            (e.currentTarget.src =
+              'https://placehold.co/600x400?text=Image+Blocked')
+          }
           className='rounded-xl h-40 w-full object-cover'
         />
       </figure>

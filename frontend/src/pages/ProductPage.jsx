@@ -116,6 +116,10 @@ function ProductPage() {
               src={product.imageUrl}
               alt={product.title}
               className='rounded-xl w-full h-80 object-cover'
+              onError={(e) =>
+                (e.currentTarget.src =
+                  'https://placehold.co/600x400?text=Image+Blocked')
+              }
             />
           </figure>
         </div>
