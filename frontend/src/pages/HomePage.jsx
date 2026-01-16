@@ -3,7 +3,7 @@ import { useProducts } from '../hooks/useProducts';
 import { useDebounce } from '../hooks/useDebounce';
 import LoadingRing from '../components/LoadingSpinner/LoadingRing';
 import ProductCard from '../components/ProductCard';
-import { useAuth } from '@clerk/clerk-react';
+import { SignInButton, useAuth } from '@clerk/clerk-react';
 import { Link } from 'react-router';
 import { SparklesIcon } from 'lucide-react';
 
