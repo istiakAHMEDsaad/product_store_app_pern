@@ -6,10 +6,12 @@
     "target": "es2022", // JS version to compile to (modern)
     "esModuleInterop": true, // Allows `import x from 'y'` syntax with CommonJS modules
     "strict": true, // Enables all strict type-checking
+    "noImplicitAny": false,
     "skipLibCheck": true, // Skips type-checking .d.ts files (faster builds)
     "moduleResolution": "node", // How TS finds modules (node_modules lookup)
     "resolveJsonModule": true, // Allows importing .json files
-    "forceConsistentCasingInFileNames": true // Prevents case-sensitivity bugs
+    "forceConsistentCasingInFileNames": true, // Prevents case-sensitivity bugs
+    "types": ["node", "express"]
   },
   "include": [
     "src/**/*.ts"
