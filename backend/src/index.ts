@@ -1,6 +1,6 @@
 import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ENV } from './config/env';
 import commentRoutes from './routes/commentRoutes';
 import productRoutes from './routes/productRoutes';
@@ -16,7 +16,7 @@ app.use(clerkMiddleware()); // auth obj will be attached to the req
 app.use(express.json()); // parses JSON request bodies.
 app.use(express.urlencoded({ extended: true })); // parses form data (like HTML forms).
 
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.json({
     message:
       'This is productify api using postgreSql, drizzle ORM & clerk auth',
