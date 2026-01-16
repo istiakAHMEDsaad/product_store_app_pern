@@ -11,10 +11,22 @@ export const syncUser = async (userData) => {
 //========== 2️⃣ Product API ==========\\
 
 // all products api
+export const getAllProducts = async ({ search, page }) => {
+  const { data } = await api.get('/products', {
+    params: {
+      search,
+      page,
+      limit: 9,
+    },
+  });
+  return data;
+};
+/*
 export const getAllProducts = async () => {
   const { data } = await api.get('/products');
   return data;
 };
+*/
 
 // single product api
 export const getProductById = async (id) => {

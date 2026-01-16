@@ -1,5 +1,5 @@
 import { db } from './index';
-import { eq } from 'drizzle-orm';
+import { eq, ilike, sql } from 'drizzle-orm';
 import {
   users,
   comments,
@@ -53,6 +53,36 @@ export const createProduct = async (data: NewProduct) => {
   return product;
 };
 
+export const getAllProducts = async ({
+  search,
+  page,
+  limit,
+}: {
+  search: string;
+  page: number;
+  limit: number;
+}) => {
+  const offset = (page - 1) * limit;
+
+  const whereClause = search ? ilike(products.title, `%${search}%`) : undefined;
+
+  const items = await db.query.products.findMany({
+    where: whereClause,
+    with: { user: true },
+    orderBy: (products, { desc }) => [desc(products.createdAt)],
+    limit,
+    offset,
+  });
+
+  const [{ count }] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(products)
+    .where(whereClause ?? sql`true`);
+
+  return { products: items, total: count };
+};
+
+/*
 export const getAllProducts = async () => {
   return db.query.products.findMany({
     with: { user: true },
@@ -60,6 +90,7 @@ export const getAllProducts = async () => {
     // the square brackets are required because Drizzle ORM's orderBy expects an array, even for a single column.
   });
 };
+*/
 
 export const getProductById = async (id: string) => {
   return db.query.products.findFirst({

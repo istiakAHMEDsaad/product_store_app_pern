@@ -9,9 +9,18 @@ import {
 } from '../lib/api';
 import { toast } from 'react-hot-toast';
 
+export const useProducts = ({ search, page }) => {
+  return useQuery({
+    queryKey: ['products', search, page],
+    queryFn: () => getAllProducts({ search, page }),
+    keepPreviousData: true,
+  });
+};
+/*
 export const useProducts = () => {
   return useQuery({ queryKey: ['products'], queryFn: getAllProducts });
 };
+*/
 
 export const useCreateProduct = () => {
   const queryClient = useQueryClient();
