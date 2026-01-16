@@ -4,7 +4,7 @@
   "description": "This is product store application's backend server.",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "db:push": "drizzle-kit push"
@@ -17,8 +17,7 @@
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
-    "pg": "^8.16.3",
-    "productify": "file:.."
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
